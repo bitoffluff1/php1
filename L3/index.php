@@ -111,11 +111,6 @@ $menu = [
             font-weight: 100;
         }
 
-        p {
-            color: #aaa;
-            font-weight: 300;
-        }
-
         @media (max-width: 600px) {
             header > nav > div > div > a {
                 margin: 5px 0;
@@ -126,6 +121,44 @@ $menu = [
                 display: none;
             }
         }
+
+        .table {
+            border: 2px solid black;
+            width: 304px;
+            display: flex;
+            flex-wrap: wrap;
+            color: #2e2e2e;
+            font-weight: 300;
+            background-color: #f44355;
+            margin: 50px auto;
+        }
+
+        p{
+            padding: 5px;
+            width: 30px;
+            height: 30px;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        .zero {
+            border-right: 2px solid black;
+            border-bottom: 2px solid black;
+        }
+
+        .firstRow {
+            border-bottom: 2px solid black;
+        }
+
+
+        .otherEven {
+            background-color: #ffcad2;
+        }
+
+        .other {
+            background-color: #b6e7ff;
+        }
+
     </style>
 </head>
 <body>
@@ -150,7 +183,30 @@ $menu = [
         ?>
     </nav>
 </header>
-<h1>Заголовок</h1>
-<p>Информация</p>
+<h1>Таблица умножения</h1>
+<div class="table">
+    <?php
+    for ($i = 0; $i < 10; $i++) {
+        echo "<p class='zero'>$i</p>";
+
+        if ($i == 0) {
+            for ($j = 1; $j < 10; $j++) {
+                $number = 1 * $j;
+                echo "<p class='firstRow'>$number</p>";
+            }
+            continue;
+        }
+
+        for ($j = 1; $j < 10; $j++) {
+            $number = $i * $j;
+            if ($j % 2 == 0 XOR $i % 2 == 0) {
+                echo "<p class='otherEven'>$number</p>";
+            } else{
+                echo "<p class='other'>$number</p>";
+            }
+        }
+    }
+    ?>
+</div>
 </body>
 </html>

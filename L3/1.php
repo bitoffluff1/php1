@@ -135,22 +135,3 @@ echo '<hr>';
 
 //решение задачи 9
 echo changeSpaces(transliteration('номер телефона'));
-
-echo '<hr>';
-//таблица умножения
-for($i = 0; $i < 10; $i++){
-    if($i == 0){
-        echo $i;
-        for($j = 1; $j < 10; $j++){
-            echo 1 * $j;
-        }
-        echo "<br>";
-        continue;
-    }
-
-    echo $i;
-    for($j = 1; $j < 10; $j++){
-        echo $i * $j;
-    }
-    echo "<br>";
-}
