@@ -9,6 +9,16 @@ while ($a <= 100) {
     $a++;
 }
 
+//второй вариант
+
+$a = 3;
+while ($a <= 100) {
+    if ($a % 3 === 0) {
+        echo $a . ', ';
+    }
+    $a = $a + 3;
+}
+
 echo '<hr>';
 
 //решение задачи 2
@@ -24,6 +34,15 @@ do {
     $a++;
 } while ($a <= 10);
 
+//второй вариант
+$a = 0;
+echo $a++ . '- это ноль. <br>';
+do {
+    echo $a++ . '- нечетное число. <br>';
+    echo $a++ . '- четное число. <br>';
+} while ($a <= 10);
+
+
 echo '<hr>';
 
 //решение задачи 3
@@ -34,22 +53,16 @@ $map = [
 ];
 
 foreach ($map as $key => $value) {
-    $cities = [];
-    foreach ($value as $city) {
-        $cities[] = $city;
-    }
-    $str = implode(', ', $cities);
-
     echo $key . ': <br>';
-    echo $str . '. <br>';
+    echo implode(', ', $value) . '. <br>';
 }
 
 echo '<hr>';
 
 //решение задачи 4
-function transliteration($str)
+function getTranslitArray()
 {
-    $letters = [
+    return [
         "а" => "a",
         "б" => "b",
         "в" => "v",
@@ -83,13 +96,25 @@ function transliteration($str)
         "э" => "e",
         "ю" => "yu",
         "я" => "ya",
-        " " => " "
+        " " => "_"
     ];
+}
 
-    return $word = strtr($str, $letters);
+function transliteration($str)
+{
+    return strtr($str, getTranslitArray());
 }
 
 echo transliteration('номер телефона');
+
+
+//второй вариант
+$str = 'номер телефона';
+
+for ($i = 0; $i < mb_strlen($str); $i++) { //strlen это длина строк
+    echo getTranslitArray()[mb_substr($str, $i, 1)]; // аналогично записи $a["н"] получаем значение n
+}
+
 
 echo '<hr>';
 
@@ -101,10 +126,20 @@ function changeSpaces($str)
 
 echo changeSpaces('номер телефона');
 
+//второй вариант
+
+function changeSpaces2($str)
+{
+    return str_replace(' ', '_', $str);
+}
+
+echo changeSpaces2('номер телефона');
+
 echo '<hr>';
 
 //решение задачи 7
-for($a = 0; $a < 10; print $a++ ){}
+for ($a = 0; $a < 10; print $a++) {
+}
 
 echo '<hr>';
 
@@ -118,16 +153,26 @@ $map = [
 foreach ($map as $key => $value) {
     $cities = [];
     foreach ($value as $city) {
-        $firstLetter = mb_substr($city, 0, 1);
-        if($firstLetter == 'К'){
+        if (mb_substr($city, 0, 1) === 'К') {
             $cities[] = $city;
         }
     }
     $str = implode(', ', $cities);
 
-    if(!empty($str)){
+    if (!empty($str)) {
         echo $key . ': <br>';
         echo $str . '. <br>';
+    }
+}
+
+
+//второй вариант
+foreach ($map as $key => $value) {
+    echo $key . ': <br>';
+    foreach ($value as $city) {
+        if (mb_substr($city, 0, 1) === 'К') {
+            echo $city . '. <br>';
+        }
     }
 }
 

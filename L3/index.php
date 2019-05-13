@@ -167,15 +167,12 @@ $menu = [
         <?php
         foreach ($menu as $key => $value) {
             if (is_array($value)) {
-                $submenuList = [];
-                foreach ($value as $submenu) {
-                    $submenuList[] = "<a href='#'>$submenu</a>";
+                echo "<div><a href='#'><span>$key</span></a><div>";
+
+                foreach ($value as $submenu => $val) {
+                    echo "<a href='#'>$val</a>";
                 }
-                $str = implode('', $submenuList);
-                echo "<div>
-                            <a href='#'><span>$key</span></a>
-                            <div>$str</div>
-                      </div>";
+                echo "</div></div>";
                 continue;
             }
             echo "<div><a href='#'><span>$value</span></a></div>";
