@@ -77,7 +77,7 @@
     <?php
     $images = scandir('img');
     foreach ($images as $key => $img) {
-        if ($img != '.' && $img != '..') {
+        if (strlen($img) > 2) {
             echo "<a href='img/$img' target='_blank'><img style='width:132px; height:140px' src='img/$img' alt='картинка'></a>";
         }
     }
@@ -155,7 +155,11 @@ $text = file_get_contents("log.txt");
 fwrite($file, $date . "\n\r");
 
 $data = explode("\n\r", $text);
-if (count($data) === 10) {
+if (count($data) >= 10) {
+    //второй вариант поиска файла складывать все файлы log в одну папку и определяем кол-во файлов в папке
+    //$dir = __DIR__ . '/img/';
+    //$count = count(scandir($dir)) - 2;
+
     $files = scandir(__DIR__);
 
     $arr = [];
@@ -172,6 +176,8 @@ if (count($data) === 10) {
 
 fclose($file);
 ?>
+
+
 
 
 </body>
