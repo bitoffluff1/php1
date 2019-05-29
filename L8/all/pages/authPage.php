@@ -2,21 +2,9 @@
 
 function index()
 {
-    $message = "";
-    if (!empty($_SESSION["message"])) {
-        $message = "<h2 class='shopping-cart-forms-text modal_title pink'>{$_SESSION["message"]}</h2>";
-        unset($_SESSION["message"]);
-    }
-
-    $messageSignUp = "";
-    if (!empty($_SESSION["messageSignUp"])) {
-        $messageSignUp = "<h2 class='shopping-cart-forms-text modal_title pink'>{$_SESSION["messageSignUp"]}</h2>";
-        unset($_SESSION["messageSignUp"]);
-    }
-
+    //форма для регистрации
     $signUp = <<<php
         <div>
-            <h2 class="shopping-cart-forms-text modal_title pink">{$messageSignUp}</h2>
             <h2 class="shopping-cart-forms-text modal_title">SIGN UP</h2>
           
             <form method="post" action="?pages=auth&func=signUp">
@@ -30,13 +18,11 @@ function index()
             </form>
         </div>
 php;
-
-
-    if ($_SESSION["adminKey"] != ADMIN_KEY && $_SESSION["login"] != LOGIN ) {
+//если не залогинен, то форма для входа
+    if ($_SESSION["adminKey"] != ADMIN_KEY && $_SESSION["login"] != LOGIN) {
         $content = <<<php
            <main class="container auth-flex">
                 <div>
-                    <h2 class="shopping-cart-forms-text modal_title pink">{$message}</h2>
                     <h2 class="shopping-cart-forms-text modal_title">SIGN IN</h2>
                   
                     <form method="post" action="?pages=auth&func=login">
@@ -47,23 +33,24 @@ php;
                         <input class="button-black shopping-cart-forms-button_size modal_size" type="submit" value="SIGN IN">
                     </form>
                 </div>
-                $signUp
+                {$signUp}
            </main>       
 php;
-    } else {
+    } else { //если залогинен
+        $login = "";
         if (!empty($_SESSION["messageSignIn"])) {
-            $message = $_SESSION["messageSignIn"];
+            $login = $_SESSION["messageSignIn"];
         }
 
         $content = <<<php
             <main class="container auth-flex">
                 <div>
-                    <h2 class="shopping-cart-forms-text modal_title pink">{$message}</h2>
-                    <a href="?pages=auth&func=logout">Sign Out</a>
+                    <h2 class="shopping-cart-forms-text modal_title pink">{$login}</h2>
+                    <a class="button-black shopping-cart-forms-button_size modal_size" href="?pages=auth&func=logout">Sign Out</a>
+                    <a class="button-black shopping-cart-forms-button_size modal_size" href="?pages=userOrders">History orders</a>
                 </div>
-                $signUp
-           </main> 
-            
+                {$signUp}
+            </main>
 php;
     }
     return $content;
@@ -76,7 +63,7 @@ function login()
         $login = clearStr($_POST["login"]);
         $password = md5($_POST["password"] . SALT);
 
-        $sql = "SELECT login, password, role FROM users WHERE login = '$login'";
+        $sql = "SELECT id, login, password, role FROM users WHERE login = '$login'";
         $res = mysqli_query(connect(), $sql);
         $row = mysqli_fetch_assoc($res);
 
@@ -87,12 +74,13 @@ function login()
                 $_SESSION["adminKey"] = ADMIN_KEY;
             } else {
                 $_SESSION["login"] = LOGIN;
+                $_SESSION["userId"] = $row["id"];
             }
 
             $_SESSION["messageSignIn"] = "Hi, $login";
         }
-        header('Location: ' . $_SERVER["HTTP_REFERER"]);
     }
+    header('Location: ' . $_SERVER["HTTP_REFERER"]);
     exit;
 }
 
@@ -107,7 +95,7 @@ function signUp()
         $row = mysqli_fetch_assoc($res);
 
         if (!empty($row)) {
-            $_SESSION["messageSignUp"] = "This login is already in use";
+            $_SESSION["message"] = "This login is already in use";
             header('Location: ' . $_SERVER["HTTP_REFERER"]);
             exit;
         }
@@ -137,8 +125,7 @@ function signUp()
 
 function logout()
 {
-    $_SESSION["adminKey"] = "";
-    $_SESSION["login"] = "";
+    session_destroy();
     header('Location: ' . $_SERVER["HTTP_REFERER"]);
     exit;
 }

@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
+-- Хост: 127.0.0.iwu:3306
 -- Время создания: Май 19 2019 г., 17:50
 -- Версия сервера: 10.3.13-MariaDB
--- Версия PHP: 7.1.22
+-- Версия PHP: 7.iwu.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;

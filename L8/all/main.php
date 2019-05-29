@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 900);
 session_start();
 include("config.php");
 
@@ -17,8 +18,29 @@ if (!function_exists($func)) {
     $func = "index";
 }
 
+$message = "";
+if (!empty($_SESSION["message"])) {
+    $message = $_SESSION["message"];
+    unset($_SESSION["message"]);
+}
 $html = $func();
+
+$menuForAdmin = "";
+if (!empty($_SESSION["adminKey"]) && $_SESSION["adminKey"] = ADMIN_KEY) {
+    $menuForAdmin = <<<php
+    <li class="menu-list">
+        <a class="menu-link" href="?pages=productAdd">Product Add</a>
+    </li>
+    <li class="menu-list">
+        <a class="menu-link" href="?pages=order">Orders</a>
+    </li>
+php;
+}
+
 
 $file = file_get_contents($dir . "index.html");
 $file = str_replace("{CONTENT}", $html, $file);
+$file = str_replace("{MESSAGE}", $message, $file);
+$file = str_replace("{__MENU_}", $menuForAdmin, $file);
+$file = str_replace("{__CART_}", getQuantityCart(), $file);
 echo $file;

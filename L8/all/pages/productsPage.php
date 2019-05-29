@@ -1,9 +1,12 @@
 <?php
 function index()
 {
-    $sql = "SELECT id, address, name, price FROM gallery";
+    $sql = "SELECT id, address, name, price FROM gallery WHERE stock = '1'";
     $res = mysqli_query(connect(), $sql);
 
+
+    $html = "<script src='main.js'></script>";
+    $item = "";
     while ($row = mysqli_fetch_assoc($res)) {
         $item .= <<<php
                 <div class="item">
@@ -17,15 +20,16 @@ function index()
                         </a>
                     </div>
                     <div class="add">
-                        <a href="?id={$row['id']}&func=addItem&pages=cart" class="add-to-card">
-                        <img class="cart-white" src="img/cart-white.svg" alt="cart">Add to Cart</a>
+                        <p onclick="addItem({$row['id']})" class="add-to-card">
+                        <img class="cart-white" src="img/cart-white.svg" alt="cart">Add to Cart</p>
                     </div>
                 </div>
 php;
     }
 
-    $html = <<<php
+    $html .= <<<php
                 <main>
+                    <h2 class='heading'>All products</h2> 
                     <div class="fetured-items-box container">$item</div>
                 </main>
 php;

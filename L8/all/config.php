@@ -27,3 +27,15 @@ function notAdmin($message = "Only for admin")
         exit();
     }
 }
+
+function getQuantityCart()
+{
+    $quantity = 0;
+    if (!empty($_SESSION["cart"])) {
+        $quantity = 0;
+        foreach ($_SESSION["cart"] as $id => $item) {
+            $quantity += $item["quantity"];
+        }
+    }
+    return $quantity;
+}

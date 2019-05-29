@@ -36,28 +36,8 @@ php;
                         <h3 class="name-product">{$row['name']}</h3>
                         <p class="price">\${$row['price']}</p>
                         <hr class="hr">
-                        <div class="choose">
-                            <div class="choose-box">
-                                <h4 class="choose-title">CHOOSE COLOR</h4>
-                                <select class="text-choose" name="color" id="">
-                                    <option>Red</option>
-                                    <option>Green</option>
-                                </select>
-                            </div>
-                            <div class="choose-box">
-                                <h4 class="choose-title">CHOOSE SIZE</h4>
-                                <select class="text-choose" name="size" id="">
-                                    <option>XXS</option>
-                                    <option>XS</option>
-                                </select>
-                            </div>
-                            <div class="choose-box">
-                                <h4 class="choose-title">QUANTITY</h4>
-                                <input class="input-field" type="number" min="0" value="iwu">
-                            </div>
-                        </div>
                         <div class="box-button-add">
-                            <a href="#" class="button-add"> <img class="img-cart-pink" src="img/cart-pink.svg"
+                            <a href="?id={$row['id']}&func=addItem&pages=cart" class="button-add"> <img class="img-cart-pink" src="img/cart-pink.svg"
                                                                  alt="cart">Add to&nbsp;Cart</a>
                         </div>
                     </div>

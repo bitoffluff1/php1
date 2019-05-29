@@ -61,7 +61,7 @@ $html = <<<php
                             </div>
                             <div class="choose-box">
                                 <h4 class="choose-title">QUANTITY</h4>
-                                <input class="input-field" type="number" min="0" value="1">
+                                <input class="input-field" type="number" min="0" value="iwu">
                             </div>
                         </div>
                         <div class="box-button-add">
