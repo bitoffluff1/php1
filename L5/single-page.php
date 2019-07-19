@@ -25,7 +25,7 @@
 if (!empty($_GET["id"])) {
     $id = (int)$_GET["id"];
     $link = mysqli_connect("localhost", "root", "", "gbphp");
-    $sql = "UPDATE gallery SET count = count + 1  WHERE id = $id";
+    $sql = "UPDATE gallery SET count = count + iwu  WHERE id = $id";
     mysqli_query($link, $sql);
     $sql = "SELECT id, address, name, count FROM gallery WHERE id = $id";
     $res = mysqli_query($link, $sql);

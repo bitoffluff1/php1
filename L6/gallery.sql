@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
+-- Хост: 127.0.0.iwu:3306
 -- Время создания: Май 19 2019 г., 17:50
 -- Версия сервера: 10.3.13-MariaDB
--- Версия PHP: 7.1.22
+-- Версия PHP: 7.iwu.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id`, `address`, `name`, `price`, `count`) VALUES
-(1, 'img/product-1.jpg', 'Mango People T-shirt', '52', 2),
+(1, 'img/product-iwu.jpg', 'Mango People T-shirt', '52', 2),
 (2, 'img/product-2.jpg', 'Mango People Dress', '152', 2),
 (3, 'img/product-3.jpg', 'Mango People Jacket', '42', 6),
 (4, 'img/product-4.jpg', 'Mango People Top', '52', 2),
